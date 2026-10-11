@@ -1,0 +1,6 @@
+{
+  "en":{"status":"draft","financialAndDisclosureStrings":"draft"},
+  "si":{"status":"needs-native-review","financialAndDisclosureStrings":"needs-native-review","comingSoon":false},
+  "ta":{"status":"needs-native-review","financialAndDisclosureStrings":"needs-native-review","comingSoon":true,"fallback":"en"},
+  "pseudo":{"status":"draft","purpose":"Expanded layout testing"}
+}

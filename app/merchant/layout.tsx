@@ -1,0 +1,1 @@
+import {cookies} from 'next/headers';import {PortalShell,AccessDenied} from '@/components/shells';export default async function Layout({children}:{children:React.ReactNode}){const role=(await cookies()).get('demo_role')?.value;return role==='merchant'?<PortalShell role="merchant">{children}</PortalShell>:<AccessDenied/>;}

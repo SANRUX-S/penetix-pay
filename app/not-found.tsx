@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function NotFound(){return <main className="access-denied"><h1>This screen isn&apos;t available.</h1><p>Return to the demo workspace to continue.</p><Link className="btn btn-primary" href="/">Open launcher</Link></main>;}

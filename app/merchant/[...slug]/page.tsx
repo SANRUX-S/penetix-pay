@@ -1,0 +1,1 @@
+import {MerchantScreen} from '@/components/merchant/screens';export default async function Page({params}:{params:Promise<{slug:string[]}>}){const {slug}=await params;return <MerchantScreen section={slug[0]}/>;}

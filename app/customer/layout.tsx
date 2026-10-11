@@ -1,0 +1,1 @@
+import {cookies} from 'next/headers';import {CustomerShell,AccessDenied} from '@/components/shells';export default async function Layout({children}:{children:React.ReactNode}){const role=(await cookies()).get('demo_role')?.value;return role==='customer'?<CustomerShell>{children}</CustomerShell>:<AccessDenied/>;}
