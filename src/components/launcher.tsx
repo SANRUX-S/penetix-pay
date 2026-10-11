@@ -1,9 +1,46 @@
 'use client';
-import {useState} from 'react';
+import {useCallback,useEffect,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
-import {ArrowRight,ArrowUpRight,Smartphone,ShoppingBag,Building2,ShieldCheck,SlidersHorizontal,RotateCcw,Check,Wallet,ChevronRight} from 'lucide-react';
+import {ArrowRight,ShieldCheck} from 'lucide-react';
 import {useDemo} from '@/services/demo';
-import {calculatePlan} from '@/domain';
-import {Logo,Money,SampleBadge,ProductImage,Button} from './ui';
-export function Launcher(){const {state,setPreference,switchRole,reset}=useDemo();const [busy,setBusy]=useState<string|null>(null);const [error,setError]=useState('');const router=useRouter();const plan=calculatePlan({priceMinor:15000000,downPaymentPct:20,annualRatePct:18,termMonths:3,feePct:1.5,acceptedDate:state.demoDate});async function enter(role:'customer'|'merchant'|'bank'){setBusy(role);setError('');try{await switchRole(role);router.push(role==='customer'?'/customer/home':`/${role}/overview`);}catch{setError('The demo workspace could not open. Try again.');setBusy(null);}}
-return <main className="launcher"><header className="launcher-header"><Logo/><span className="launcher-header-label">THE DEMO WORKSPACE</span><span className="concept-pill"><span className="status-dot"/>Concept Demo</span></header><section className="launcher-body"><div className="launcher-intro"><span className="eyebrow"><span className="mini-line"/>A SMARTER WAY TO PAY</span><h1>Your next chapter.<br/><span>On your terms.</span></h1><p className="launcher-description">Explore a proposed way to split a purchase into clear, manageable installments. Every number, from the first payment to the last, in plain sight.</p><div className="intro-points"><span><Check size={17}/>Transparent costs</span><span><Check size={17}/>Bank-funded model</span><span><Check size={17}/>You choose the plan</span></div><div className="workspace-selection"><div className="section-heading"><h2>Step into the app</h2><span>Choose your experience</span></div><button className="workspace-card featured" onClick={()=>enter('customer')} disabled={!!busy}><span className="role-icon"><Smartphone size={23}/></span><span><strong>Customer app</strong><small>Discover. Compare. Plan your payments.</small></span><span className="role-arrow">{busy==='customer'?'…':<ArrowRight size={20}/>}</span></button><div className="workspace-secondary"><button className="workspace-card" onClick={()=>enter('merchant')} disabled={!!busy}><span className="role-icon"><ShoppingBag size={21}/></span><span><strong>Merchant portal</strong><small>Offers & settlements</small></span><ArrowUpRight size={19}/></button><button className="workspace-card" onClick={()=>enter('bank')} disabled={!!busy}><span className="role-icon"><Building2 size={21}/></span><span><strong>Bank workspace</strong><small>Risk & unit economics</small></span><ArrowUpRight size={19}/></button></div></div><div className="launcher-scenario"><SlidersHorizontal size={18}/><label htmlFor="scenario">Sample scenario</label><select id="scenario" value={state.persona} onChange={e=>setPreference('persona',e.target.value)}><option value="new">New customer</option><option value="active">Active plan</option><option value="conditional">Conditional approval</option><option value="declined">Declined application</option><option value="overdue">Overdue installment</option></select><button className="icon-button" onClick={reset} aria-label="Reset demo"><RotateCcw size={17}/></button></div>{error&&<p role="alert">{error}</p>}</div><div className="launcher-preview"><div className="preview-note"><span className="status-dot"/>A LITTLE LOOK INSIDE</div><div className="preview-app"><div className="preview-app-header"><Logo compact/><span className="concept-pill">Concept Demo</span></div><div className="preview-greeting"><span>YOUR NEXT PURCHASE</span><h2>A plan that fits your life.</h2></div><div className="preview-product"><ProductImage id="smartphone"/><div><SampleBadge/><h3>Smartphone 128 GB</h3><span className="muted">Sample Home Electronics</span><p><Money minor={plan.priceMinor}/></p></div></div><div className="preview-plan"><div className="preview-plan-heading"><span>YOUR ILLUSTRATIVE PLAN</span><span className="badge">3 months</span></div><div className="preview-figures"><div><small>Monthly payment</small><strong><Money minor={plan.monthlyMinor}/></strong></div><div><small>Total repayable</small><strong><Money minor={plan.totalRepayableMinor}/></strong></div></div><div className="preview-progress"><span/><span/><span/></div><div className="preview-plan-detail"><span>Down payment</span><Money minor={plan.downPaymentMinor}/></div><div className="preview-plan-detail"><span>Upfront processing fee</span><Money minor={plan.feeMinor}/></div><div className="preview-plan-detail total"><span>Total cost to you</span><Money minor={plan.totalCostMinor}/></div><p className="rate-disclaimer">18% p.a. · Illustrative demo rate — not offered by any bank.</p></div><div className="preview-payment"><span className="role-icon"><Wallet size={20}/></span><div><strong>Clear from start to finish.</strong><span>Explore the schedule before you commit.</span></div><ChevronRight size={18}/></div></div><div className="preview-caption"><span className="caption-mark">PX</span><span>Thoughtfully designed for Sri Lanka.<br/><small>Fictional products. Simulated financing. No money moves.</small></span></div></div></section><footer className="launcher-footer"><span>© 2026 PENETIX · Concept demonstration</span><span><ShieldCheck size={15}/>Pre-launch concept · No confirmed bank partners</span><Button variant="ghost" onClick={()=>enter('bank')}>Explore partnership readiness<ArrowUpRight size={15}/></Button></footer></main>;}
+
+export function Launcher(){
+  const {ready,switchRole}=useDemo();
+  const router=useRouter();
+  const started=useRef(false);
+  const [loading,setLoading]=useState(false);
+  const [error,setError]=useState('');
+  const enter=useCallback(async()=>{
+    if(started.current)return;
+    started.current=true;
+    setLoading(true);
+    setError('');
+    try{
+      await switchRole('customer');
+      router.replace('/customer/home');
+      router.refresh();
+    }catch{
+      started.current=false;
+      setLoading(false);
+      setError('The sample workspace could not open. Check your connection and try again.');
+    }
+  },[switchRole,router]);
+  useEffect(()=>{
+    if(!ready)return;
+    const timer=window.setTimeout(()=>{void enter();},1450);
+    return()=>window.clearTimeout(timer);
+  },[ready,enter]);
+  return <main className="px-splash" aria-label="Opening PENETIX Pay concept app">
+    <div className="px-splash-aura" aria-hidden="true"/>
+    <div className="px-splash-center">
+      <div className="px-splash-logo" aria-hidden="true"><span>PX</span><i/></div>
+      <div className="px-splash-brand">PENETIX <span>Pay</span></div>
+      <p>A smarter way to pay.</p>
+      <div className="px-splash-track" role="progressbar" aria-label="Opening demo application"><span/></div>
+      <span className="px-splash-status" role="status">{error?'Unable to open':loading?'Opening your experience':'Preparing your experience'}</span>
+      {error&&<><p className="px-splash-error">{error}</p><button className="px-splash-skip" onClick={()=>void enter()}>Try again <ArrowRight size={16}/></button></>}
+      {!error&&<button className="px-splash-skip" onClick={()=>void enter()}>Enter app now <ArrowRight size={16}/></button>}
+    </div>
+    <div className="px-splash-foot"><ShieldCheck size={15}/> Concept preview · No real banking or money movement</div>
+  </main>;
+}
