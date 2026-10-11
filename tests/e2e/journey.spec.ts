@@ -9,6 +9,10 @@ test.describe('PENETIX Pay Launcher and Journeys', () => {
     await expect(page.locator('h1').first()).toContainText('Hello, Aruni');
     await expect(page.getByText('PENETIX FIND MY DEAL')).toBeVisible();
     await expect(page.getByRole('button', {name: /Workspaces/i})).toBeVisible();
+    await page.getByRole('button', {name: /Workspaces/i}).click();
+    await expect(page.getByRole('dialog')).toBeVisible();
+    await page.getByRole('button', {name: /Merchant portal/i}).click();
+    await page.waitForURL('**/merchant/overview', {timeout: 15000});
   });
 
   test('Customer role access and navigation', async ({ page, context }) => {

@@ -7,7 +7,7 @@ Node.js 22.13 or later.
 npm install
 npm run dev
 ```
-Open http://127.0.0.1:3000. Choose Customer, Merchant, or Bank in the demo launcher. The customer app is mobile first. The partner workspaces use responsive desktop layouts.
+Open http://127.0.0.1:3000. An animated PENETIX Pay splash opens the full customer experience automatically. The header **Workspaces** switcher or **Demo controls (Alt + P)** opens the fictional merchant and bank workspaces. Customer navigation is mobile-first and full-width responsive on desktop; partner workspaces are desktop-first and mobile responsive.
 
 ## Checks
 ```sh

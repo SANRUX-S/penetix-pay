@@ -18,7 +18,6 @@ export function Launcher(){
     try{
       await switchRole('customer');
       router.replace('/customer/home');
-      router.refresh();
     }catch{
       started.current=false;
       setLoading(false);

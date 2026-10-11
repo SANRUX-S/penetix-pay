@@ -1,6 +1,8 @@
 # System verification report
 
-Measured on node v22 / Next.js 16.3.4 (Turbopack).
+**Historical baseline before the `feat/full-app-entry-redesign` branch.** The test results below refer to the original demo launcher implementation and MUST NOT be interpreted as a passed verification of the new animated entry or responsive visual redesign. Re-run all checks and update this report before merging or publicly presenting the revised UI.
+
+Originally measured on node v22 / Next.js 16.3.4 (Turbopack).
 
 ## 1. Automated checks summary
 
@@ -32,7 +34,7 @@ Measured on node v22 / Next.js 16.3.4 (Turbopack).
   - Pre-operations contribution: Rs. 2,514.14
 
 ## 3. End-to-End browser journeys tested
-1. **Launcher**: role choices, persona selector, disclaimers, responsive preview.
+1. **Original launcher (historical)**: role choices, persona selector, disclaimers, responsive preview. New splash-to-app behavior not yet browser-verified.
 2. **Customer Navigation**: mobile shell with bottom navigation, category chips, greeting.
 3. **Customer Purchase**: explore catalog -> product details -> choose plan (EMI and total repayable displayed side by side) -> review & consent -> simulated decision.
 4. **Find My Deal**: 3-step voluntary comparison flow (Product -> Limit -> Voluntary offers -> Where the money goes itemisation).

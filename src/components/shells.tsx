@@ -15,7 +15,7 @@ export function CustomerShell({children}:{children:React.ReactNode}){
  const [busy,setBusy]=useState(false);
  const [error,setError]=useState('');
  const links=[{label:'Home',href:'/customer/home',icon:Home},{label:'Explore',href:'/customer/explore',icon:Search},{label:'Payments',href:'/customer/payments',icon:CreditCard},{label:'Profile',href:'/customer/profile',icon:User}];
- async function changeWorkspace(role:'merchant'|'bank'){setBusy(true);setError('');try{await switchRole(role);setMenu(false);router.push('/'+role+'/overview');router.refresh();}catch{setBusy(false);setError('Could not switch workspaces. Try again.');}}
+ async function changeWorkspace(role:'merchant'|'bank'){setBusy(true);setError('');try{await switchRole(role);setMenu(false);router.push('/'+role+'/overview');}catch{setBusy(false);setError('Could not switch workspaces. Try again.');}}
  return <div className="customer-stage"><div className="customer-app">
   <header className="customer-header px-app-header">
    <Link href="/customer/home" aria-label="PENETIX Pay home"><Logo/></Link>
