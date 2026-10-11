@@ -2,13 +2,13 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 test.describe('PENETIX Pay Launcher and Journeys', () => {
-  test('Launcher renders with all roles and disclaimers', async ({ page }) => {
+  test('Splash opens full customer app automatically', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('h1').first()).toContainText('Your next chapter');
-    await expect(page.locator('text=Customer app')).toBeVisible();
-    await expect(page.locator('text=Merchant portal')).toBeVisible();
-    await expect(page.locator('text=Bank workspace')).toBeVisible();
-    await expect(page.locator('text=Concept Demo').first()).toBeVisible();
+    await expect(page.getByText('A smarter way to pay.')).toBeVisible();
+    await page.waitForURL('**/customer/home', {timeout: 15000});
+    await expect(page.locator('h1').first()).toContainText('Hello, Aruni');
+    await expect(page.getByText('PENETIX FIND MY DEAL')).toBeVisible();
+    await expect(page.getByRole('button', {name: /Workspaces/i})).toBeVisible();
   });
 
   test('Customer role access and navigation', async ({ page, context }) => {
