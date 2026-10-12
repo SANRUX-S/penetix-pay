@@ -1,1 +1,45 @@
-{"name":"penetix-pay-concept-app","version":"0.1.0","private":true,"type":"module","scripts":{"dev":"next dev --hostname 0.0.0.0 --port 3000","build":"npm run truth-lint && npm run contrast-check && node --max-old-space-size=4096 node_modules/next/dist/bin/next build","start":"next start --hostname 0.0.0.0 --port 3000","typecheck":"tsc --noEmit","lint":"eslint src app tests scripts/truth-lint.ts scripts/contrast-check.ts","truth-lint":"tsx scripts/truth-lint.ts","contrast-check":"tsx scripts/contrast-check.ts","test":"vitest run","test:e2e":"playwright test"},"dependencies":{"@fontsource/inter":"^5.2.8","@fontsource/noto-sans-sinhala":"^5.2.8","@fontsource/noto-sans-tamil":"^5.2.8","decimal.js":"^10.6.0","lucide-react":"^1.31.0","next":"16.3.4","react":"19.2.6","react-dom":"19.2.6","recharts":"^3.8.0","zod":"^3.25.76"},"devDependencies":{"@axe-core/playwright":"^4.11.1","@playwright/test":"^1.58.2","@tailwindcss/postcss":"4.2.1","@types/node":"22.19.19","@types/react":"19.2.14","@types/react-dom":"19.2.3","eslint":"9.39.4","eslint-config-next":"16.3.4","fast-check":"^4.3.0","tailwindcss":"4.2.1","tsx":"^4.21.0","typescript":"5.9.3","vitest":"^3.2.4"}}
+{
+  "name": "penetix-pay-concept-app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0 --port 3000",
+    "build": "npm run truth-lint && npm run contrast-check && node --max-old-space-size=4096 node_modules/next/dist/bin/next build",
+    "start": "next start --hostname 0.0.0.0 --port 3000",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src app tests scripts/truth-lint.ts scripts/contrast-check.ts",
+    "truth-lint": "tsx scripts/truth-lint.ts",
+    "contrast-check": "tsx scripts/contrast-check.ts",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "sandbox:payment": "tsx scripts/sandbox-payment.ts"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/noto-sans-sinhala": "^5.2.8",
+    "@fontsource/noto-sans-tamil": "^5.2.8",
+    "decimal.js": "^10.6.0",
+    "lucide-react": "^1.31.0",
+    "next": "16.3.4",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "recharts": "^3.8.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/postcss": "4.2.1",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.3.4",
+    "fast-check": "^4.3.0",
+    "tailwindcss": "4.2.1",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

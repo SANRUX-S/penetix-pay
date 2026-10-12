@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import {usePathname,useRouter} from 'next/navigation';
 import {useState,useEffect} from 'react';
-import {Home,Search,CreditCard,User,ArrowUpRight,ChevronLeft,LayoutDashboard,Package,ShoppingBag,Tag,Wallet,MessageSquare,Layers,SlidersHorizontal,ClipboardCheck,Building2,Menu,X,Settings2,RotateCcw} from 'lucide-react';
+import {Home,Search,CreditCard,User,ScanLine,ArrowUpRight,ChevronLeft,LayoutDashboard,Package,ShoppingBag,Tag,Wallet,MessageSquare,Layers,SlidersHorizontal,ClipboardCheck,Building2,Menu,X,Settings2,RotateCcw} from 'lucide-react';
 import {useDemo} from '@/services/demo';
 import {Logo,SampleBadge,Button,Dialog} from './ui';
 export function AccessDenied(){return <main className="access-denied"><Logo/><span className="concept-pill">Concept Demo</span><h1>Choose the right workspace.</h1><p>This demo role cannot open this workspace. Return to the launcher to switch roles.</p><Link className="btn btn-primary" href="/">Back to demo launcher</Link></main>;}
@@ -14,7 +14,7 @@ export function CustomerShell({children}:{children:React.ReactNode}){
  const [menu,setMenu]=useState(false);
  const [busy,setBusy]=useState(false);
  const [error,setError]=useState('');
- const links=[{label:'Home',href:'/customer/home',icon:Home},{label:'Explore',href:'/customer/explore',icon:Search},{label:'Payments',href:'/customer/payments',icon:CreditCard},{label:'Profile',href:'/customer/profile',icon:User}];
+ const links=[{label:'Home',href:'/customer/home',icon:Home},{label:'Scan',href:'/customer/scan-pay',icon:ScanLine},{label:'Stores',href:'/customer/explore',icon:Search},{label:'Payments',href:'/customer/payments',icon:CreditCard},{label:'Profile',href:'/customer/profile',icon:User}];
  async function changeWorkspace(role:'merchant'|'bank'){setBusy(true);setError('');try{await switchRole(role);setMenu(false);router.push('/'+role+'/overview');}catch{setBusy(false);setError('Could not switch workspaces. Try again.');}}
  return <div className="customer-stage"><div className="customer-app">
   <header className="customer-header px-app-header">
