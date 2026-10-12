@@ -16,7 +16,7 @@ The sandbox result `settled` is FICTIONAL and never a real receipt.
 1. Licensed financial partner, suitable bank/product/legal approvals, compliant contracts and consumer disclosures.
 2. Bank-accepted authentication, verified identity/KYC provider and controlled document/data retention. Email verification does NOT equal lending KYC.
 3. Managed transactional DB (separate protected environment), authorized server identities, scoped access, encryption, backups, incident management and operational reconciliation.
-4. Real financing partner sandbox credentials, server-side authenticated webhooks with replay detection, provider-certified QR/payment rails, processing/refund and reconciliation tests.
+4. Real financing partner sandbox credentials, server-side authenticated webhooks with replay detection, provider-approved QR/payment rails, processing/refund and reconciliation tests.
 5. Signed pilot agreements, security audits and verified transaction limits. Obtain explicit amount/payment authorisation before any real charge.
 
 ## Planned next implementation packages
